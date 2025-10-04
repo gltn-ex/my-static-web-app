@@ -1,3 +1,19 @@
 <h2>コンテンツ1-1-1</h2>
 <p>これは content1.html から読み込まれた本文です。</p>
 <a href="top.html">指示書トップへ</a>
+<!-- スクリプト本文 -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("a.internal-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const url = link.getAttribute("href");
+        
+        // 親ウィンドウの関数を呼ぶ
+        if (parent && parent.navigateFromIframe) {
+          parent.navigateFromIframe(url);
+        }
+      });
+    });
+  });
+</script>

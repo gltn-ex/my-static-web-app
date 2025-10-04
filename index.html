@@ -120,6 +120,20 @@
         parent = parent.parentElement.closest('li');
       }
     });
+    
+    // iframe 内から呼ばれる関数
+    function navigateFromIframe(file) {
+      viewer.src = file;
+      location.hash = file.replace(/\.html$/, '');
+      
+      // メニュー選択状態を更新
+      const target = [...document.querySelectorAll('.menu-item')]
+        .find(btn => btn.getAttribute('onclick')?.includes(file));
+      if (target) {
+        localStorage.setItem('activeMenuId', target.id);
+        localStorage.setItem('activeContentUrl', file);
+      }
+    }
   </script>
 </body>
 </html>
