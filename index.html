@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>指示書</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- サイドバー -->
+    <aside class="sidebar">
+      <button id="item-0" class="menu-item" onclick="selectMenu(this,'top.html'); localStorage.clear(); location.reload();" title="指示書トップ">指示書トップ</button>
+      <ul class="accordion">
+        <!-- メニュー1 開始 -->
+        <li>
+          <input type="checkbox" id="menu-0">
+          <label for="menu-0" title="メニュー1"><span class="arrow">▶</span><span class="menu-label">📁 メニュー1</span></label>
+          <ul class="submenu">
+            <li>
+              <input type="checkbox" id="menu-1">
+              <label for="menu-1" title="サブ1-1"><span class="arrow">▶</span><span class="menu-label">📁 サブ1-1</span></label>
+              <ul class="submenu">
+                <li>
+                  <input type="checkbox" id="menu-2">
+                  <label for="menu-2" title="サブ1-1-1"><span class="arrow">▶</span><span class="menu-label">📁 サブ1-1-1</span></label>
+                  <ul class="submenu">
+                    <li>
+                      <button id="item-1" class="menu-item" onclick="selectMenu(this,'content1.html')" title="あいうえおかきくけこさしすせそ">📄 あいうえおかきくけこさしすせそ</button>
+                    </li>
+                    <li>
+                      <button id="item-2" class="menu-item" onclick="selectMenu(this,'content2.html')" title="たちつてとなにぬねのはひふへほ">📄 たちつてとなにぬねのはひふへほ</button>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <button id="item-3" class="menu-item" onclick="selectMenu(this,'content3.html')" title="サブ1-2">📄 サブ1-2</button>
+            </li>
+          </ul>
+        </li>
+        <!-- メニュー1 終了 -->
+        <!-- メニュー2 開始 -->
+        <li>
+          <input type="checkbox" id="menu-3">
+          <label for="menu-3" title="メニュー2"><span class="arrow">▶</span><span class="menu-label">📁 メニュー2</span></label>
+          <ul class="submenu">
+            <li>
+              <button id="item-4" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-1">📄 サブ2-1</button>
+            </li>
+            <li>
+              <button id="item-5" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-2">📄 サブ2-2</button>
+            </li>
+            <li>
+              <button id="item-6" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-3">📄 サブ2-3</button>
+            </li>
+            <li>
+              <button id="item-7" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-4">📄 サブ2-4</button>
+            </li>
+            <li>
+              <button id="item-8" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-5">📄 サブ2-5</button>
+            </li>
+          </ul>
+        </li>
+        <!-- メニュー2 終了 -->
+      </ul>
+    </aside>
+    <!-- メイン表示領域 -->
+    <main class="main-content">
+      <iframe id="viewer" src="top.html"></iframe>
+    </main>
+  </div>
+  <!-- JavaScript -->
+  <script>
+    const viewer = document.getElementById('viewer');
+    
+    // メニュー選択時の処理
+    function selectMenu(el, file) {
+      // iframeに読み込み
+      viewer.src = file;
+      
+      // 選択状態を保存
+      localStorage.setItem('activeMenuId', el.id);
+      localStorage.setItem('activeContentUrl', file);
+      
+      // ハッシュ更新
+      location.hash = file.replace(/\.html$/, '');
+    }
+    
+    // ページ読み込み時に復元
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedId = localStorage.getItem('activeMenuId');
+      const savedUrl = localStorage.getItem('activeContentUrl');
+      
+      if (savedId && savedUrl) {
+        const target = document.getElementById(savedId);
+        if (target) {
+          // ページ復元
+          viewer.src = savedUrl;
+        }
+      }
+      
+      const currentPage = document.getElementById('viewer').getAttribute('src');
+      if (!currentPage) return;
+      
+      // 対応するメニューを探す
+      const target = [...document.querySelectorAll('.menu-item')]
+        .find(btn => btn.getAttribute('onclick')?.includes(currentPage));
+      
+      // アコーディオンメニューは親階層をたどって開く
+      let parent = target.closest('li');
+      while (parent) {
+        const cb = parent.querySelector('input[type="checkbox"]');
+        if (cb) {
+          cb.checked = true;
+          parent.parentElement.querySelectorAll(':scope > li > input[type="checkbox"]').forEach(sibling => {
+            if (sibling !== cb) sibling.checked = false;
+          });
+        }
+        parent = parent.parentElement.closest('li');
+      }
+    });
+  </script>
+</body>
+</html>

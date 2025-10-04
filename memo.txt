@@ -1,0 +1,21 @@
+■フォルダ
+
+<input type="checkbox" id="menu2">
+<label for="menu2" class="menu-label"><span class="arrow">▶</span> サブ1-1</label>
+<ul class="submenu">
+  <li>
+    (ここに次のコンテンツ内容を追加)
+  </li>
+</ul>
+
+
+■ファイル
+
+<li>
+  <button class="menu-item" onclick="selectMenu(this,'contentXXX.html')">ウィジェット名</button>
+</li>
+
+
+<li>***</li> が同階層の項目となる
+
+

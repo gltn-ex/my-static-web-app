@@ -1,0 +1,138 @@
+/* body全体 */
+body {
+  margin: 0;
+  height:100%;
+  font-family: sans-serif;
+  background: #ffffff;
+}
+
+/* body全体 */
+.container {
+  display: flex;
+  height: 100dvh;
+  min-height: 100%;
+}
+
+/* サイドバー */
+.sidebar {
+  width: 350px;
+  background: #2c3e50;
+  color: white;
+  padding: 5px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* アコーディオン */
+.accordion {
+  list-style: none;     /* リストの黒丸を消す */
+  padding: 0;
+  margin: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* .accordion直下にある<li>要素にだけスタイルを適用 */
+/* メニュー間の隙間 */
+.accordion > li {
+  margin-bottom: 3px;
+}
+
+/* チェックボックスは非表示 */
+.accordion input[type="checkbox"] {
+  display: none;
+}
+
+/* アコーディオンメニュー本体 */
+.accordion label {
+  display: flex;           /* 横並びにする */
+  align-items: center;     /* 縦位置を中央揃え */
+  gap: 5px;                /* 矢印と文字列の間隔を一定に */
+  padding: 5px;
+  cursor: pointer;
+  overflow-y: auto;
+}
+
+/* アコーディオンメニュー ホバー */
+.accordion label:hover {
+  background: #3d566e;
+}
+
+/* アコーディオンメニュー 展開後の最大高さ(動的に取得できないため大きめに) */
+.accordion input[type="checkbox"]:checked ~ .submenu {
+  max-height: 4000px;
+}
+
+/* メニュー文字サイズ */
+.menu-label {
+  font-size: 12px;
+  margin: 0;
+  /* 下線 */
+  /* text-decoration-line: underline; */
+  /* text-decoration-style: solid; */
+  /* text-decoration-color: #ffffff; */
+  /* text-underline-offset: 3px; */
+}
+
+/* 矢印アイコン */
+.arrow {
+  font-size: 8px;
+  transition: transform 0.2s ease;
+}
+
+/* チェックが入ったら矢印を回転 */
+.accordion input[type="checkbox"]:checked + label .arrow {
+  transform: rotate(90deg);
+}
+
+/* サブメニュー */
+.submenu {
+  max-height: 0;
+  transition: max-height 0.2s ease;
+  list-style: none;
+  padding-left: 15px;
+  white-space: normal;
+  overflow: hidden;
+}
+
+/* メニューアイテム */
+.menu-item {
+  display: block;
+  width: 100%;
+  padding: 3px;
+  background: #2c3e50;
+  border: none;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: normal;
+  overflow: hidden;
+}
+
+/* メニューアイテム ホバー */
+.menu-item:hover {
+  background: #3d566e;
+}
+
+/* メニューアイテム 選択中 */
+.menu-item.active {
+  background: #2980b9;
+  font-weight: bold;
+}
+
+/* メインコンテンツ */
+.main-content {
+  flex: 1;
+  background: #ade0ee;
+}
+
+/* メインコンテンツ iframe */
+.main-content iframe {
+  width:  100%;
+  /* 一番下に不明な空白が生まれるため100%ではなく少し小さくする */
+  height: 98%;
+  border: none;
+}
+
