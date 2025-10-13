@@ -24,6 +24,12 @@ body {
   max-width: 100%;
 }
 
+.resizer {
+  width: 5px;
+  cursor: ew-resize;
+  background: #ccc;    /* 見えるように色をつける */
+}
+
 /* アコーディオン */
 .accordion {
   list-style: none;     /* リストの黒丸を消す */
@@ -51,7 +57,7 @@ body {
   gap: 5px;                /* 矢印と文字列の間隔を一定に */
   padding: 5px;
   cursor: pointer;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 /* アコーディオンメニュー ホバー */
@@ -92,7 +98,7 @@ body {
   transition: max-height 0.2s ease;
   list-style: none;
   padding-left: 15px;
-  white-space: normal;
+  white-space: nowrap;
   overflow: hidden;
 }
 
@@ -107,7 +113,7 @@ body {
   text-align: left;
   cursor: pointer;
   font-size: 12px;
-  white-space: normal;
+  white-space: nowrap;
   overflow: hidden;
 }
 
@@ -134,5 +140,10 @@ body {
   /* 一番下に不明な空白が生まれるため100%ではなく少し小さくする */
   height: 98%;
   border: none;
+}
+
+/* iframe無効化イベント */
+iframe.disable-events {
+  pointer-events: none;
 }
 

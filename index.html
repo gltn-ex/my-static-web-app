@@ -65,6 +65,8 @@
         <!-- メニュー2 終了 -->
       </ul>
     </aside>
+    <!-- リサイズ用ハンドル -->
+    <div class="resizer"></div>
     <!-- メイン表示領域 -->
     <main class="main-content">
       <iframe id="viewer" src="top.html"></iframe>
@@ -73,6 +75,8 @@
   <!-- JavaScript -->
   <script>
     const viewer = document.getElementById('viewer');
+    const sidebar = document.querySelector('.sidebar');
+    const resizer = document.querySelector('.resizer');
     
     // メニュー選択時の処理
     function selectMenu(el, file) {
@@ -134,6 +138,37 @@
         localStorage.setItem('activeContentUrl', file);
       }
     }
+    
+    // サイドバーリサイズ処理
+    let isResizing = false;
+    let startX = 0;
+    let startWidth = 0;
+    
+    resizer.addEventListener('mousedown', (e) => {
+      isResizing = true;
+      startX = e.clientX;
+      startWidth = sidebar.offsetWidth;
+      document.body.style.cursor = 'ew-resize';
+      viewer.classList.add('disable-events');
+      e.preventDefault();
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+      if (!isResizing) return;
+      const dx = e.clientX - startX;
+      const newWidth = startWidth + dx;
+      if (newWidth > 100 && newWidth < 800) {
+        sidebar.style.width = newWidth + 'px';
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isResizing) {
+        isResizing = false;
+        document.body.style.cursor = 'default';
+        viewer.classList.remove('disable-events');
+      }
+    });
   </script>
 </body>
 </html>
