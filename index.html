@@ -106,11 +106,14 @@
       localStorage.setItem('activeContentUrl', file);
       
       // 履歴に積む（pushState）
-      history.pushState({ file: file, menuId: el.id }, '', '#' + file.replace(/\.html$/, ''));
+      history.pushState({ file: file, menuId: el.id }, '', '#' + file);
     }
     
     // ページ読み込み時に復元
     window.addEventListener('DOMContentLoaded', () => {
+      const currentFile = viewer.getAttribute('src');
+      history.replaceState({ file: currentFile }, '', '#' + currentFile);
+      
       const savedId = localStorage.getItem('activeMenuId');
       const savedUrl = localStorage.getItem('activeContentUrl');
       
@@ -148,7 +151,7 @@
       viewer.src = file;
       
       // 履歴に積む
-      history.pushState({ file: file }, '', '#' + file.replace(/\.html$/, ''));
+      history.pushState({ file: file }, '', '#' + file);
       
       // メニュー選択状態を更新
       const target = [...document.querySelectorAll('.menu-item')]
