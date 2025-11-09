@@ -19,3 +19,17 @@
   <!-- 1行分の表示 終了 -->
 </table>
 <a href="/top.html" class="internal-link">指示書トップへ</a>
+<script>
+  (function() {
+    const links = document.querySelectorAll("a.internal-link");
+    links.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const file = link.getAttribute("href");
+        if (parent && parent.navigateFromIframe) {
+          parent.navigateFromIframe(file);
+        }
+      });
+    });
+  })();
+</script>
