@@ -187,6 +187,32 @@
         viewer.classList.remove('disable-events');
       }
     });
+    
+    // ハッシュ変化時に復元処理
+    window.addEventListener('hashchange', () => {
+      const hash = location.hash.replace(/^#/, '') + '.html';
+      if (!hash) return;
+        // iframe に反映
+        viewer.src = hash;
+        
+        // 対応するメニューを探す
+        const target = [...document.querySelectorAll('.menu-item')]
+          .find(btn => btn.getAttribute('onclick')?.includes(hash));
+        
+        if (target) {
+          // localStorage 更新
+          localStorage.setItem('activeMenuId', target.id);
+          localStorage.setItem('activeContentUrl', hash);
+          
+          // アコーディオン展開
+          let parent = target.closest('li');
+          while (parent) {
+            const cb = parent.querySelector('input[type="checkbox"]');
+            if (cb) cb.checked = true;
+              parent = parent.parentElement.closest('li');
+          }
+        }
+    });
   </script>
 </body>
 </html>
