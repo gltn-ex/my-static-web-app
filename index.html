@@ -105,8 +105,8 @@
       localStorage.setItem('activeMenuId', el.id);
       localStorage.setItem('activeContentUrl', file);
       
-      // ハッシュ更新
-      location.hash = file.replace(/\.html$/, '');
+      // 履歴に積む（pushState）
+      history.pushState({ file: file, menuId: el.id }, '', '#' + file.replace(/\.html$/, ''));
     }
     
     // ページ読み込み時に復元
@@ -146,7 +146,9 @@
     // iframe 内から呼ばれる関数
     function navigateFromIframe(file) {
       viewer.src = file;
-      location.hash = file.replace(/\.html$/, '');
+      
+      // 履歴に積む
+      history.pushState({ file: file }, '', '#' + file.replace(/\.html$/, ''));
       
       // メニュー選択状態を更新
       const target = [...document.querySelectorAll('.menu-item')]
@@ -179,7 +181,7 @@
         sidebar.style.width = newWidth + 'px';
       }
     });
-
+    
     document.addEventListener('mouseup', () => {
       if (isResizing) {
         isResizing = false;
@@ -188,30 +190,28 @@
       }
     });
     
-    // ハッシュ変化時に復元処理
-    window.addEventListener('hashchange', () => {
-      const hash = location.hash.replace(/^#/, '') + '.html';
-      if (!hash) return;
-        // iframe に反映
-        viewer.src = hash;
+    // 履歴戻り／進む時の処理
+    window.addEventListener('popstate', (event) => {
+      if (event.state && event.state.file) {
+        const file = event.state.file;
+        viewer.src = file;
         
-        // 対応するメニューを探す
         const target = [...document.querySelectorAll('.menu-item')]
-          .find(btn => btn.getAttribute('onclick')?.includes(hash));
+          .find(btn => btn.getAttribute('onclick')?.includes(file));
         
         if (target) {
-          // localStorage 更新
           localStorage.setItem('activeMenuId', target.id);
-          localStorage.setItem('activeContentUrl', hash);
+          localStorage.setItem('activeContentUrl', file);
           
           // アコーディオン展開
           let parent = target.closest('li');
           while (parent) {
             const cb = parent.querySelector('input[type="checkbox"]');
             if (cb) cb.checked = true;
-              parent = parent.parentElement.closest('li');
+            parent = parent.parentElement.closest('li');
           }
         }
+      }
     });
   </script>
 </body>
