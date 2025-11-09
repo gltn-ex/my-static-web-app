@@ -11,27 +11,32 @@
     <aside class="sidebar">
       <button id="item-0" class="menu-item" onclick="selectMenu(this,'top.html'); localStorage.clear(); location.reload();" title="指示書トップ">指示書トップ</button>
       <ul class="accordion">
-        <!-- メニュー1 開始 -->
+        <!-- [Start] Whale -->
         <li>
           <input type="checkbox" id="menu-0">
           <label for="menu-0" title="Whale"><span class="arrow">▶</span><span class="menu-label">📁 Whale</span></label>
           <ul class="submenu">
+            <!-- [Start] Mode -->
             <li>
               <input type="checkbox" id="menu-1">
               <label for="menu-1" title="Mode"><span class="arrow">▶</span><span class="menu-label">📁 Mode</span></label>
               <ul class="submenu">
+                <!-- [Start] Common -->
                 <li>
                   <input type="checkbox" id="menu-2">
                   <label for="menu-2" title="Common"><span class="arrow">▶</span><span class="menu-label">📁 Common</span></label>
                   <ul class="submenu">
+                    <!-- [Start] Widget -->
                     <li>
                       <input type="checkbox" id="menu-3">
                       <label for="menu-3" title="Widget"><span class="arrow">▶</span><span class="menu-label">📁 Widget</span></label>
                       <ul class="submenu">
+                        <!-- [Start] Character -->
                         <li>
                           <input type="checkbox" id="menu-4">
                           <label for="menu-4" title="Character"><span class="arrow">▶</span><span class="menu-label">📁 Character</span></label>
                           <ul class="submenu">
+                            <!-- [Start] Global -->
                             <li>
                               <input type="checkbox" id="menu-5">
                               <label for="menu-5" title="Global"><span class="arrow">▶</span><span class="menu-label">📁 Global</span></label>
@@ -41,69 +46,41 @@
                                 </li>
                               </ul>
                             </li>
+                            <!-- [End] Global -->
+                            <!-- [Start] Parts -->
+                            <li>
+                              <input type="checkbox" id="menu-6">
+                              <label for="menu-6" title="Parts"><span class="arrow">▶</span><span class="menu-label">📁 Parts</span></label>
+                              <ul class="submenu">
+                                <!-- [Start] CharacterThumbnail -->
+                                <li>
+                                  <input type="checkbox" id="menu-7">
+                                  <label for="menu-7" title="CharacterThumbnail"><span class="arrow">▶</span><span class="menu-label">📁 CharacterThumbnail</span></label>
+                                  <ul class="submenu">
+                                    <li>
+                                      <button id="item-1" class="menu-item" onclick="selectMenu(this,'/Whale/Mode/Common/Widget/Character/Parts/CharacterThumbnail/WBP_Character_Thumbnail.html')" title="WBP_Character_Thumbnail">📄 WBP_Character_Thumbnail</button>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <!-- [End] CharacterThumbnail -->
+                              </ul>
+                            </li>
+                            <!-- [End] Parts -->
                           </ul>
                         </li>
+                        <!-- [End] Character -->
                       </ul>
                     </li>
+                    <!-- [End] Widget -->
                   </ul>
                 </li>
+                <!-- [End] Common -->
               </ul>
             </li>
+            <!-- [End] Mode -->
           </ul>
         </li>
-        <!-- メニュー1 終了 -->
-        <!-- メニュー1 開始 -->
-        <li>
-          <input type="checkbox" id="menu-0">
-          <label for="menu-0" title="メニュー1"><span class="arrow">▶</span><span class="menu-label">📁 メニュー1</span></label>
-          <ul class="submenu">
-            <li>
-              <input type="checkbox" id="menu-1">
-              <label for="menu-1" title="サブ1-1"><span class="arrow">▶</span><span class="menu-label">📁 サブ1-1</span></label>
-              <ul class="submenu">
-                <li>
-                  <input type="checkbox" id="menu-2">
-                  <label for="menu-2" title="サブ1-1-1"><span class="arrow">▶</span><span class="menu-label">📁 サブ1-1-1</span></label>
-                  <ul class="submenu">
-                    <li>
-                      <button id="item-1" class="menu-item" onclick="selectMenu(this,'content1.html')" title="あいうえおかきくけこさしすせそ">📄 あいうえおかきくけこさしすせそ</button>
-                    </li>
-                    <li>
-                      <button id="item-2" class="menu-item" onclick="selectMenu(this,'content2.html')" title="たちつてとなにぬねのはひふへほ">📄 たちつてとなにぬねのはひふへほ</button>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <button id="item-3" class="menu-item" onclick="selectMenu(this,'content3.html')" title="サブ1-2">📄 サブ1-2</button>
-            </li>
-          </ul>
-        </li>
-        <!-- メニュー1 終了 -->
-        <!-- メニュー2 開始 -->
-        <li>
-          <input type="checkbox" id="menu-3">
-          <label for="menu-3" title="メニュー2"><span class="arrow">▶</span><span class="menu-label">📁 メニュー2</span></label>
-          <ul class="submenu">
-            <li>
-              <button id="item-4" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-1">📄 サブ2-1</button>
-            </li>
-            <li>
-              <button id="item-5" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-2">📄 サブ2-2</button>
-            </li>
-            <li>
-              <button id="item-6" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-3">📄 サブ2-3</button>
-            </li>
-            <li>
-              <button id="item-7" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-4">📄 サブ2-4</button>
-            </li>
-            <li>
-              <button id="item-8" class="menu-item" onclick="selectMenu(this,'content4.html')" title="サブ2-5">📄 サブ2-5</button>
-            </li>
-          </ul>
-        </li>
-        <!-- メニュー2 終了 -->
+        <!-- [End] Whale -->
       </ul>
     </aside>
     <!-- リサイズ用ハンドル -->
